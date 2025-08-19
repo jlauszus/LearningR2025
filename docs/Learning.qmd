@@ -21,8 +21,9 @@ I am a *phd student* and I am **very** new to R
 3*3
 ```
 
-
 ```{r}
 2+2
 ```
 
+## Testing of git
+I just want to test this 
