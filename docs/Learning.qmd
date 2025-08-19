@@ -1,0 +1,28 @@
+---
+title: "Reproducible documents"
+author: "Johanne Sloth Lauszus"
+format: html
+---
+
+```{r setup}
+library(tidyverse)
+
+```
+## About me
+- Johanne
+- AU
+- LMT
+
+I am a *phd student* and I am **very** new to R
+
+## Simple code
+
+```{r}
+3*3
+```
+
+
+```{r}
+2+2
+```
+
