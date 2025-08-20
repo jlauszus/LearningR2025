@@ -20,11 +20,11 @@ I am a *phd student* and I am **very** new to R
 ## Simple code
 
 ```{r}
-3*3
+3 * 3
 ```
 
 ```{r}
-2+2
+2 + 2
 ```
 
 ## Testing of git
@@ -42,8 +42,8 @@ glimpse(post_meal_data)
 #| warning: false
 #| fig-cap: "Distribution of BMI."
 #| label: fig-bmi-histo
-ggplot(post_meal_data, aes(x=BMI))+
-         geom_histogram()
+ggplot(post_meal_data, aes(x = BMI)) +
+  geom_histogram()
 ```
 ## Exercise: discrete plots
 ```{r}
@@ -57,7 +57,7 @@ See @fig-glykemi-bar above for a cool plot!
 ## Plotting two discrete variables
 
 ```{r}
-ggplot(post_meal_data, aes(x=Group, fill=as.character(glykemi))) +
+ggplot(post_meal_data, aes(x = Group, fill = as.character(glykemi))) +
   geom_bar(position = position_dodge())
 ```
 ## side by side plots
@@ -68,13 +68,22 @@ ggplot(post_meal_data, aes(x=Group, fill=as.character(glykemi))) +
 #| fig-cap: "BMI and glycemia, side by side"
 #| fig-subcap:
 #| - "Distribution of BMI"
-#| - "Number of those with glycemia" 
+#| - "Number of those with glycemia"
 #| layout-ncol: 2
-ggplot(post_meal_data, aes(x=BMI))+
+ggplot(post_meal_data, aes(x = BMI)) +
   geom_histogram()
 
 ggplot(post_meal_data, aes(x = glykemi)) +
   geom_bar()
 ```
 
-
+## Plotting two continuous variables
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "BMI and area under the curve"
+#| label: fig-bmi-auc-pg
+ggplot(post_meal_data, aes(x = BMI, y = auc_pg)) +
+  geom_point() +
+  geom_smooth()
+```
