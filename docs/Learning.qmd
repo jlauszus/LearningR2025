@@ -45,4 +45,11 @@ glimpse(post_meal_data)
 ggplot(post_meal_data, aes(x=BMI))+
          geom_histogram()
 ```
-
+## Exercise: discrete plots
+```{r}
+#| fig-cap: "Glykemi among patients"
+#| label: fig-glykemi-bar
+ggplot(post_meal_data, aes(x = glykemi)) +
+  geom_bar()
+```
+See @fig-glykemi-bar above for a cool plot!
