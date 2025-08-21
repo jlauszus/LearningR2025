@@ -113,7 +113,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">auc_insulin =</span> auc_ins</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(glykemi <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>glykemi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>glykemi)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>tidied_post_meal_data <span class="ot">&lt;-</span> tidier_post_meal_data <span class="sc">%&gt;%</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">insulin_glucose_ratio =</span> auc_insulin <span class="sc">/</span> auc_glucose,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Group =</span> <span class="fu">if_else</span>(Group <span class="sc">==</span> <span class="st">"CTR"</span>, <span class="st">"Control"</span>, <span class="st">"First-degree-relative"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="about-me" class="level2">
 <h2 class="anchored" data-anchor-id="about-me">About me</h2>
@@ -726,6 +731,32 @@ Figure&nbsp;4: BMI and area under the curve
  9    17    51  29.7 CTR     834.  39020.       0
 10    18    51  21.2 CTR     787.  12343.       0
 # ℹ 13 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="modifying-columns" class="level2">
+<h2 class="anchored" data-anchor-id="modifying-columns">Modifying columns</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>tidier_post_meal_data <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">insulin_glucose_ratio =</span> auc_insulin <span class="sc">/</span> auc_glucose,</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Group =</span> <span class="fu">if_else</span>(Group <span class="sc">==</span> <span class="st">"CTR"</span>, <span class="st">"Control"</span>, <span class="st">"First-degree relative"</span>)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 27 × 7
+      id   Age   BMI Group         auc_glucose auc_insulin insulin_glucose_ratio
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;       &lt;dbl&gt;                 &lt;dbl&gt;
+ 1     1    50  27.5 First-degree…        806.      28728.                  35.7
+ 2     2    51  33.7 First-degree…        944.      42243.                  44.7
+ 3     3    43  26.3 First-degree…        694.       7108.                  10.2
+ 4     4    55  25.9 First-degree…        731.      37593.                  51.4
+ 5     5    53  29.4 First-degree…       1004.      33863.                  33.7
+ 6     6    51  23.7 First-degree…        713.      15008.                  21.1
+ 7     7    48  23.9 First-degree…        965.      23196.                  24.0
+ 8     8    35  22   First-degree…        741.      15272.                  20.6
+ 9     9    54  26.4 First-degree…        848.      24426.                  28.8
+10    10    52  24.5 First-degree…        759.      22475.                  29.6
+# ℹ 17 more rows</code></pre>
 </div>
 </div>
 </section>
