@@ -9,6 +9,7 @@ format: html
 #| warning: false
 library(tidyverse)
 post_meal_data <- read_csv2(here::here("data/post-meal-insulin.csv"))
+small_post_meal_data <- select(post_meal_data, id, Age, BMI, Group, auc_pg, auc_ins, glykemi)
 ```
 ## About me
 - Johanne
@@ -86,4 +87,21 @@ ggplot(post_meal_data, aes(x = glykemi)) +
 ggplot(post_meal_data, aes(x = BMI, y = auc_pg)) +
   geom_point() +
   geom_smooth()
+```
+## Selecting data
+```{r}
+select(post_meal_data, Age, BMI, Weight)
+```
+```{r}
+select(post_meal_data, -Group)
+```
+## Select helpers
+```{r}
+select(post_meal_data, starts_with("PG"))
+```
+```{r}
+select(post_meal_data, ends_with("DXA"))
+```
+```{r}
+select(post_meal_data, contains("0"))
 ```
