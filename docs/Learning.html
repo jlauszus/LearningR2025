@@ -1100,6 +1100,92 @@ Table&nbsp;1: Mean values of Age and BMI for each group.
 </div>
 </div>
 </section>
+<section id="bigger-table" class="level2">
+<h2 class="anchored" data-anchor-id="bigger-table">Bigger table</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>post_meal_data <span class="sc">%&gt;%</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(BMI <span class="sc">&lt;</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_group =</span> <span class="fu">if_else</span>(Age <span class="sc">&lt;</span> <span class="dv">40</span>, <span class="st">"Young"</span>, <span class="st">"Old"</span>),</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Group =</span> <span class="fu">if_else</span>(Group <span class="sc">==</span> <span class="st">"CTR"</span>, <span class="st">"Control"</span>, <span class="st">"First-degree Relative"</span>)</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Group, age_group) <span class="sc">%&gt;%</span></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"AUC c-Peptide"</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(auc_cp), <span class="dv">1</span>),</span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"AUC Glucose"</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(auc_pg), <span class="dv">1</span>),</span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"AUC insulin"</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(auc_ins), <span class="dv">1</span>)</span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age group"</span> <span class="ot">=</span> age_group,</span>
+<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Family history"</span> <span class="ot">=</span> Group</span>
+<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb66-17"><a href="#cb66-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb66-18"><a href="#cb66-18" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Group'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div id="tbl-summary-table" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summary-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Median values of AUC meassurements by age group and family history group
+</figcaption>
+<div aria-describedby="tbl-summary-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 14%">
+<col style="width: 20%">
+<col style="width: 17%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Family history</th>
+<th style="text-align: left;">Age group</th>
+<th style="text-align: right;">AUC c-Peptide</th>
+<th style="text-align: right;">AUC Glucose</th>
+<th style="text-align: right;">AUC insulin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Control</td>
+<td style="text-align: left;">Old</td>
+<td style="text-align: right;">179.2</td>
+<td style="text-align: right;">788.1</td>
+<td style="text-align: right;">23398.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Control</td>
+<td style="text-align: left;">Young</td>
+<td style="text-align: right;">176.2</td>
+<td style="text-align: right;">763.7</td>
+<td style="text-align: right;">23636.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">First-degree Relative</td>
+<td style="text-align: left;">Old</td>
+<td style="text-align: right;">196.8</td>
+<td style="text-align: right;">847.6</td>
+<td style="text-align: right;">25243.1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">First-degree Relative</td>
+<td style="text-align: left;">Young</td>
+<td style="text-align: right;">178.1</td>
+<td style="text-align: right;">719.4</td>
+<td style="text-align: right;">25499.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
 
 </main>
 <!-- /main column -->
